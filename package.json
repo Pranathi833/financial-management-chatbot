@@ -1,0 +1,33 @@
+{
+  "name": "finsmart-backend",
+  "version": "1.0.0",
+  "description": "Backend for FinSmart financial advisor",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "express-validator": "^6.14.2",
+    "firebase-admin": "^11.5.0",
+    "helmet": "^6.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.0.3",
+    "node-schedule": "^2.1.0",
+    "nodemailer": "^6.10.0",
+    "plaid": "^12.5.0",
+    "twilio": "^3.83.3"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.3"
+  }
+}

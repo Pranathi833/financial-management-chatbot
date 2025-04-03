@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #2563eb;
+  --secondary: #0ea5e9;
+  --dark: #1e293b;
+  --light: #f8fafc;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+}
+
+/* Base Styles */
+body {
+  @apply font-sans bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Glassmorphism Effect */
+.glass-card {
+  @apply bg-white/5 backdrop-blur-md border border-white/10;
+}
+
+/* Text Gradients */
+.gradient-text {
+  @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+}
+
+/* Animations */
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Typing Indicator */
+.typing-indicator {
+  @apply flex p-2;
+}
+
+.typing-dot {
+  @apply w-2 h-2 bg-gray-400 rounded-full mx-1;
+  animation: typingAnimation 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(1) { animation-delay: 0s; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingAnimation {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-5px); }
+}
+
+/* Chat Bubbles */
+.chat-bubble {
+  @apply max-w-[85%] p-3 rounded-lg;
+  transition: all 0.3s ease;
+}
+
+.user-message {
+  @apply bg-blue-600 rounded-tr-none;
+}
+
+.ai-message {
+  @apply bg-gray-700 rounded-tl-none;
+}
+
+/* Scrollbars */
+.custom-scrollbar::-webkit-scrollbar {
+  @apply w-1.5;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-gray-800;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-full;
+}
+
+/* Input Fields */
+.input-field {
+  @apply w-full bg-black/20 border border-gray-700 rounded-lg p-3 focus:outline-none focus:ring-1 focus:ring-blue-500 transition;
+}
+
+.input-field-error {
+  @apply border-red-500 focus:ring-red-500;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition;
+}
+
+.btn-secondary {
+  @apply glass-card hover:bg-white/10 text-white py-2 px-4 rounded-lg transition;
+}
+
+/* Risk Indicator */
+.risk-indicator {
+  @apply h-2 rounded-full;
+  background: linear-gradient(90deg, var(--success) 0%, var(--warning) 50%, var(--danger) 100%);
+}
+
+/* Investment Cards */
+.investment-card {
+  @apply glass-card rounded-xl overflow-hidden transition-all duration-300;
+}
+
+.investment-card:hover {
+  @apply -translate-y-1 shadow-lg;
+}
+
+/* Table Styles */
+.data-table {
+  @apply min-w-full divide-y divide-gray-700;
+}
+
+.data-table th {
+  @apply px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider;
+}
+
+.data-table td {
+  @apply px-6 py-4 whitespace-nowrap text-sm;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .main-content {
+    @apply flex-col;
+  }
+  
+  .left-panel, .center-panel, .right-panel {
+    @apply w-full mb-4;
+  }
+}
+
+@media (max-width: 768px) {
+  .investment-grid {
+    @apply grid-cols-1;
+  }
+  
+  .portfolio-columns {
+    @apply grid-cols-1;
+  }
+}
+
+/* Utility Classes */
+.text-success {
+  @apply text-green-400;
+}
+
+.text-warning {
+  @apply text-yellow-400;
+}
+
+.text-danger {
+  @apply text-red-400;
+}
+
+.bg-success {
+  @apply bg-green-400/20;
+}
+
+.bg-warning {
+  @apply bg-yellow-400/20;
+}
+
+.bg-danger {
+  @apply bg-red-400/20;
+}
+
+/* Transitions */
+.transition-slow {
+  @apply transition-all duration-500 ease-in-out;
+}
+
+.transition-medium {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.transition-fast {
+  @apply transition-all duration-150 ease-in-out;
+}

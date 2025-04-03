@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart AI - Chat Advisor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #0ea5e9;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, #0f172a 100%);
+            color: var(--light);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .message-history::-webkit-scrollbar {
+            width: 6px;
+        }
+        .message-history::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        .message-history::-webkit-scrollbar-thumb {
+            background-color: #4b5563;
+            border-radius: 6px;
+        }
+        .typing-indicator {
+            display: flex;
+            padding: 8px 12px;
+        }
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #9CA3AF;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full glass-card px-8 py-4 shadow-lg z-50">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-robot text-2xl text-yellow-400"></i>
+                <span class="text-xl font-bold gradient-text">FinSmart AI</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="index.html" class="text-lg hover:text-blue-300 transition">Home</a>
+                <a href="investments.html" class="text-lg hover:text-blue-300 transition">Investments</a>
+                <a href="chatbot.html" class="text-lg font-medium text-blue-300 transition">AI Advisor</a>
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center cursor-pointer">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-24 pb-8 px-8 flex h-[calc(100vh-6rem)] max-w-7xl mx-auto">
+        <!-- Conversation History (25%) -->
+        <div class="w-1/4 pr-4 hidden md:block">
+            <div class="glass-card rounded-xl h-full flex flex-col">
+                <div class="p-6 border-b border-gray-700">
+                    <h3 class="text-xl font-semibold">Conversations</h3>
+                    <div class="relative mt-4">
+                        <input type="text" placeholder="Search conversations..." 
+                               class="w-full bg-black/20 border border-gray-700 rounded-lg p-2 pl-8 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
+                        <i class="fas fa-search absolute left-2 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+                <div class="message-history overflow-y-auto flex-grow p-4">
+                    <div class="space-y-2">
+                        <div class="bg-gray-700/50 p-3 rounded-lg cursor-pointer hover:bg-gray-600/50 transition">
+                            <div class="flex justify-between items-start">
+                                <p class="font-medium">Budget Planning</p>
+                                <span class="text-xs text-gray-400">2h ago</span>
+                            </div>
+                            <p class="text-sm text-gray-400 truncate">How can I save more money each month...</p>
+                        </div>
+                        <div class="bg-gray-700/50 p-3 rounded-lg cursor-pointer hover:bg-gray-600/50 transition">
+                            <div class="flex justify-between items-start">
+                                <p class="font-medium">Investment Advice</p>
+                                <span class="text-xs text-gray-400">1d ago</span>
+                            </div>
+                            <p class="text-sm text-gray-400 truncate">What mutual funds should I consider...</p>
+                        </div>
+                        <div class="bg-blue-600/30 p-3 rounded-lg cursor-pointer border border-blue-500/30">
+                            <div class="flex justify-between items-start">
+                                <p class="font-medium">Current Session</p>
+                                <span class="text-xs text-blue-200">Now</span>
+                            </div>
+                            <p class="text-sm text-blue-200 truncate">Active conversation with AI advisor...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 border-t border-gray-700">
+                    <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg flex items-center justify-center transition">
+                        <i class="fas fa-plus mr-2"></i> New Chat
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Interface (75%) -->
+        <div class="w-full md:w-3/4 pl-0 md:pl-4">
+            <div class="glass-card rounded-xl h-full flex flex-col">
+                <div class="p-6 border-b border-gray-700">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xl font-semibold">AI Financial Advisor</h3>
+                        <div class="flex space-x-2">
+                            <button class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-700 hover:bg-gray-600 transition">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                            <button class="w-8 h-8 rounded-full flex items-center justify-center bg-gray-700 hover:bg-gray-600 transition md:hidden">
+                                <i class="fas fa-history"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-window bg-black/20 rounded-xl m-4 flex-grow overflow-y-auto p-4">
+                    <!-- Date Divider -->
+                    <div class="flex items-center my-4">
+                        <div class="flex-grow border-t border-gray-700"></div>
+                        <span class="mx-2 text-sm text-gray-400">Today</span>
+                        <div class="flex-grow border-t border-gray-700"></div>
+                    </div>
+                    
+                    <!-- Sample Messages -->
+                    <div class="flex justify-end mb-4">
+                        <div class="flex flex-col items-end max-w-[85%]">
+                            <div class="bg-blue-600 p-3 rounded-lg rounded-tr-none">
+                                <p>How can I improve my savings?</p>
+                            </div>
+                            <div class="text-xs text-gray-400 mt-1 flex items-center">
+                                <span>10:42 AM</span>
+                                <i class="fas fa-check-double text-blue-400 ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-start mb-4">
+                        <div class="flex flex-col max-w-[85%]">
+                            <div class="bg-gray-700 p-3 rounded-lg rounded-tl-none">
+                                <p class="font-medium mb-1">Savings Recommendations:</p>
+                                <ul class="list-disc pl-5 space-y-1">
+                                    <li>Automate transfers to savings account</li>
+                                    <li>Review and cancel unused subscriptions</li>
+                                    <li>Set specific savings goals</li>
+                                </ul>
+                            </div>
+                            <div class="text-xs text-gray-400 mt-1">10:43 AM</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Typing Indicator -->
+                    <div class="flex justify-start mb-4 hidden" id="typingIndicator">
+                        <div class="bg-gray-700 p-2 rounded-lg rounded-tl-none">
+                            <div class="typing-indicator">
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Suggested Prompts -->
+                <div class="px-4 pt-2">
+                    <div class="flex flex-wrap gap-2 mb-3">
+                        <button class="text-sm bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-full transition suggested-prompt">
+                            Show my spending trends
+                        </button>
+                        <button class="text-sm bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-full transition suggested-prompt">
+                            Suggest mutual funds
+                        </button>
+                        <button class="text-sm bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-full transition suggested-prompt">
+                            मेरी बचत बढ़ाने के लिए सुझाव दें
+                        </button>
+                        <button class="text-sm bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded-full transition suggested-prompt">
+                            Help with debt management
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Input Area -->
+                <div class="p-4 border-t border-gray-700">
+                    <form id="chatForm" class="flex">
+                        <div class="flex-grow relative">
+                            <input type="text" placeholder="Type your financial query..." 
+                                   class="w-full bg-black/20 border border-gray-700 rounded-l-lg p-3 pr-10 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                            <div class="absolute right-2 top-3 flex space-x-1">
+                                <button type="button" class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <button type="button" class="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 hover:text-white transition">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-4 rounded-r-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chat functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatForm = document.getElementById('chatForm');
+            const chatWindow = document.querySelector('.chat-window');
+            const typingIndicator = document.getElementById('typingIndicator');
+            
+            // Handle form submission
+            chatForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const input = this.querySelector('input');
+                const message = input.value.trim();
+                
+                if (message) {
+                    // Add user message
+                    addMessage(message, 'user');
+                    input.value = '';
+                    
+                    // Show typing indicator
+                    typingIndicator.classList.remove('hidden');
+                    chatWindow.scrollTop = chatWindow.scrollHeight;
+                    
+                    // Simulate AI response after delay
+                    setTimeout(() => {
+                        typingIndicator.classList.add('hidden');
+                        const responses = {
+                            "Show my spending trends": "Your spending trends show 40% on food, 20% on transport, and 15% on entertainment. Consider reducing dining out expenses.",
+                            "Suggest mutual funds": "Based on your risk profile, I recommend: 1) Axis Bluechip Fund, 2) Mirae Asset Large Cap Fund, 3) Parag Parikh Flexi Cap Fund.",
+                            "मेरी बचत बढ़ाने के लिए सुझाव दें": "1. अपने SIP को ₹2,000/माह बढ़ाएँ 2. सोने के ETF का पता लगाएं 3. बाहर खाने के खर्च को 20% कम करें",
+                            "Help with debt management": "For debt management: 1) Prioritize high-interest debts 2) Consider debt consolidation 3) Create a repayment plan"
+                        };
+                        
+                        const response = responses[message] || "I've analyzed your request. Here are my recommendations: 1) Review your monthly subscriptions 2) Set up automatic transfers to savings 3) Consider tax-saving investments";
+                        addMessage(response, 'ai');
+                    }, 2000);
+                }
+            });
+            
+            // Handle suggested prompts
+            document.querySelectorAll('.suggested-prompt').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const input = chatForm.querySelector('input');
+                    input.value = this.textContent;
+                    chatForm.dispatchEvent(new Event('submit'));
+                });
+            });
+            
+            function addMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `flex justify-${sender === 'user' ? 'end' : 'start'} mb-4`;
+                
+                const messageContent = `
+                    <div class="flex flex-col ${sender === 'user' ? 'items-end' : ''} max-w-[85%]">
+                        <div class="${sender === 'user' ? 'bg-blue-600 rounded-tr-none' : 'bg-gray-700 rounded-tl-none'} p-3 rounded-lg">
+                            <p>${text}</p>
+                        </div>
+                        <div class="text-xs text-gray-400 mt-1">
+                            ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                            ${sender === 'user' ? '<i class="fas fa-check-double text-blue-400 ml-1"></i>' : ''}
+                        </div>
+                    </div>
+                `;
+                
+                messageDiv.innerHTML = messageContent;
+                chatWindow.appendChild(messageDiv);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>

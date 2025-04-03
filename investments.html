@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart AI - Investments</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #0ea5e9;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, #0f172a 100%);
+            color: var(--light);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .investment-card {
+            transition: all 0.3s ease;
+        }
+        .investment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        .risk-indicator {
+            background: linear-gradient(90deg, #10b981 0%, #f59e0b 50%, #ef4444 100%);
+        }
+        .portfolio-chart {
+            height: 300px;
+        }
+        .sparkline {
+            height: 40px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full glass-card px-8 py-4 shadow-lg z-50">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-robot text-2xl text-yellow-400"></i>
+                <span class="text-xl font-bold gradient-text">FinSmart AI</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="index.html" class="text-lg hover:text-blue-300 transition">Home</a>
+                <a href="investments.html" class="text-lg font-medium text-blue-300 transition">Investments</a>
+                <a href="chatbot.html" class="text-lg hover:text-blue-300 transition">AI Advisor</a>
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center cursor-pointer">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-24 pb-8 px-8 max-w-7xl mx-auto">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold">Investment Portfolio</h1>
+            <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg flex items-center transition">
+                <i class="fas fa-plus mr-2"></i> New Investment
+            </button>
+        </div>
+        
+        <!-- Risk Assessment -->
+        <div class="glass-card rounded-xl p-6 mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Your Risk Profile</h2>
+                <button class="text-sm bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-full transition">
+                    Reassess Profile
+                </button>
+            </div>
+            <div class="mb-4">
+                <div class="flex justify-between text-sm text-gray-400 mb-1">
+                    <span>Conservative</span>
+                    <span>Balanced</span>
+                    <span>Aggressive</span>
+                </div>
+                <div class="risk-indicator h-2 rounded-full mb-2"></div>
+                <div class="flex justify-center">
+                    <input type="range" min="1" max="10" value="6" 
+                           class="w-full max-w-lg accent-blue-500" id="riskSlider">
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                <div class="glass-card p-4 rounded-lg">
+                    <p class="text-sm text-gray-400 mb-1">Recommended Allocation</p>
+                    <p class="text-xl font-bold">60% Equity / 40% Debt</p>
+                </div>
+                <div class="glass-card p-4 rounded-lg">
+                    <p class="text-sm text-gray-400 mb-1">Projected Returns</p>
+                    <p class="text-xl font-bold text-green-400">10.5% p.a.</p>
+                </div>
+                <div class="glass-card p-4 rounded-lg">
+                    <p class="text-sm text-gray-400 mb-1">Risk Level</p>
+                    <p class="text-xl font-bold text-yellow-400">Moderate</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Portfolio Overview -->
+        <div class="glass-card rounded-xl p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Portfolio Overview</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="portfolio-chart">
+                    <canvas id="portfolioChart"></canvas>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass-card p-4 rounded-lg">
+                        <p class="text-sm text-gray-400 mb-1">Total Invested</p>
+                        <p class="text-2xl font-bold">₹80,000</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-lg">
+                        <p class="text-sm text-gray-400 mb-1">Current Value</p>
+                        <p class="text-2xl font-bold text-green-400">₹92,500</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-lg">
+                        <p class="text-sm text-gray-400 mb-1">Total Return</p>
+                        <p class="text-2xl font-bold text-green-400">+15.6%</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-lg">
+                        <p class="text-sm text-gray-400 mb-1">Annualized</p>
+                        <p class="text-2xl font-bold text-green-400">+12.3%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recommended Investments -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Recommended for You</h2>
+                <button class="text-sm glass-card hover:bg-white/5 px-3 py-1 rounded-full transition">
+                    View All
+                </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Equity Fund -->
+                <div class="investment-card glass-card rounded-xl overflow-hidden transition-all duration-300">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-chart-line text-blue-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold">Blue Chip Equity</h3>
+                                <p class="text-sm text-gray-400">Large Cap Funds</p>
+                            </div>
+                        </div>
+                        <div class="mb-4 sparkline">
+                            <canvas class="sparkline" id="equitySparkline"></canvas>
+                        </div>
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <p class="text-sm text-gray-400">1Y Return</p>
+                                <p class="font-bold text-green-400">+12.5%</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Risk</p>
+                                <p class="font-bold text-yellow-400">Medium</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Min. Invest</p>
+                                <p class="font-bold">₹5,000</p>
+                            </div>
+                        </div>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition">
+                            Invest Now
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Thematic Fund -->
+                <div class="investment-card glass-card rounded-xl overflow-hidden transition-all duration-300">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-seedling text-green-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold">Green Energy</h3>
+                                <p class="text-sm text-gray-400">Thematic Funds</p>
+                            </div>
+                        </div>
+                        <div class="mb-4 sparkline">
+                            <canvas class="sparkline" id="thematicSparkline"></canvas>
+                        </div>
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <p class="text-sm text-gray-400">1Y Return</p>
+                                <p class="font-bold text-green-400">+18.2%</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Risk</p>
+                                <p class="font-bold text-orange-400">High</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Min. Invest</p>
+                                <p class="font-bold">₹10,000</p>
+                            </div>
+                        </div>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition">
+                            Invest Now
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Debt Fund -->
+                <div class="investment-card glass-card rounded-xl overflow-hidden transition-all duration-300">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="fas fa-shield-alt text-purple-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold">Government Bonds</h3>
+                                <p class="text-sm text-gray-400">Debt Funds</p>
+                            </div>
+                        </div>
+                        <div class="mb-4 sparkline">
+                            <canvas class="sparkline" id="debtSparkline"></canvas>
+                        </div>
+                        <div class="flex justify-between items-center mb-4">
+                            <div>
+                                <p class="text-sm text-gray-400">1Y Return</p>
+                                <p class="font-bold text-green-400">+7.3%</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Risk</p>
+                                <p class="font-bold text-green-400">Low</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-400">Min. Invest</p>
+                                <p class="font-bold">₹1,000</p>
+                            </div>
+                        </div>
+                        <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition">
+                            Invest Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Your Investments -->
+        <div class="glass-card rounded-xl p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold">Your Investments</h2>
+                <div class="flex space-x-2">
+                    <button class="text-sm glass-card hover:bg-white/5 px-3 py-1 rounded-full transition">
+                        <i class="fas fa-filter mr-1"></i> Filter
+                    </button>
+                    <button class="text-sm glass-card hover:bg-white/5 px-3 py-1 rounded-full transition">
+                        <i class="fas fa-download mr-1"></i> Export
+                    </button>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-700">
+                    <thead class="bg-gray-800">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Fund</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Amount</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Value</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Return</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700">
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-blue-600/20 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-chart-line text-blue-400"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium">Nifty 50 Index</div>
+                                        <div class="text-sm text-gray-400">Equity</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">₹50,000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">₹62,500</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-400">+25%</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="#" class="text-blue-400 hover:text-blue-300 mr-3 transition">View</a>
+                                <a href="#" class="text-red-400 hover:text-red-300 transition">Sell</a>
+                            </td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex-shrink-0 h-10 w-10 bg-purple-600/20 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fas fa-shield-alt text-purple-400"></i>
+                                    </div>
+                                    <div>
+                                        <div class="text-sm font-medium">G-Sec Bonds</div>
+                                        <div class="text-sm text-gray-400">Debt</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">₹30,000</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm">₹32,100</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-400">+7%</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="#" class="text-blue-400 hover:text-blue-300 mr-3 transition">View</a>
+                                <a href="#" class="text-red-400 hover:text-red-300 transition">Sell</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="flex justify-between items-center mt-4">
+                <div class="text-sm text-gray-400">
+                    Showing <span class="font-medium">1</span> to <span class="font-medium">2</span> of <span class="font-medium">2</span> investments
+                </div>
+                <div class="flex space-x-1">
+                    <button class="w-8 h-8 rounded flex items-center justify-center glass-card hover:bg-white/5 transition">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="w-8 h-8 rounded flex items-center justify-center bg-blue-600 text-white">
+                        1
+                    </button>
+                    <button class="w-8 h-8 rounded flex items-center justify-center glass-card hover:bg-white/5 transition">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Portfolio Pie Chart
+            const portfolioCtx = document.getElementById('portfolioChart').getContext('2d');
+            const portfolioChart = new Chart(portfolioCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Equity', 'Debt', 'Gold', 'Cash'],
+                    datasets: [{
+                        data: [60, 30, 7, 3],
+                        backgroundColor: [
+                            '#3b82f6',
+                            '#8b5cf6',
+                            '#f59e0b',
+                            '#64748b'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: '#e2e8f0',
+                                font: {
+                                    family: 'Poppins'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Sparkline Charts
+            function createSparkline(id, color) {
+                const ctx = document.getElementById(id).getContext('2d');
+                return new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            data: [100, 105, 102, 110, 115, 125],
+                            borderColor: color,
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                display: false
+                            },
+                            y: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+
+            createSparkline('equitySparkline', '#3b82f6');
+            createSparkline('thematicSparkline', '#10b981');
+            createSparkline('debtSparkline', '#8b5cf6');
+
+            // Risk Slider
+            const riskSlider = document.getElementById('riskSlider');
+            riskSlider.addEventListener('input', function() {
+                const value = parseInt(this.value);
+                let riskLevel = '';
+                let color = '';
+                
+                if (value <= 3) {
+                    riskLevel = 'Conservative';
+                    color = 'text-green-400';
+                } else if (value <= 7) {
+                    riskLevel = 'Moderate';
+                    color = 'text-yellow-400';
+                } else {
+                    riskLevel = 'Aggressive';
+                    color = 'text-red-400';
+                }
+                
+                document.querySelector('.risk-level').textContent = riskLevel;
+                document.querySelector('.risk-level').className = `text-xl font-bold ${color} risk-level`;
+            });
+        });
+    </script>
+</body>
+</html>

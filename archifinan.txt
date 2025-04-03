@@ -1,0 +1,163 @@
+┌───────────────────────────────────────────────────────┐
+│                    User Devices                       │
+│   ┌─────────────┐    ┌─────────────┐    ┌─────────┐  │
+│   │ Web Browser │    │ Mobile App  │    │ Tablet  │  │
+│   └──────┬──────┘    └──────┬──────┘    └────┬────┘  │
+└──────────┼──────────────────┼────────────────┼───────┘
+           │ HTTPS            │ HTTPS          │
+┌──────────▼──────────────────▼────────────────▼───────┐
+│                 Cloud Hosting (AWS/Azure)            │
+│   ┌───────────────────────────────────────────────┐  │
+│   │                API Gateway                    │  │
+│   └──────┬──────────────────┬──────────────┬──────┘  │
+│          │                  │              │         │
+│  ┌───────▼──────┐ ┌─────────▼───┐ ┌────────▼──────┐  │
+│  │ AI Service   │ │ Transaction │ │ User Service  │  │
+│  │ (NLP/ML)     │ │ (Blockchain)│ │ (Auth/Profile)│  │
+│  └───────┬──────┘ └─────────┬───┘ └────────┬──────┘  │
+│          │                  │              │         │
+└──────────┼──────────────────┼──────────────┼───────┬─┘
+           │                  │              │       │
+┌──────────▼──────┐ ┌─────────▼───┐ ┌────────▼──────▼──┐
+│   PostgreSQL    │ │ Firebase    │ │ Blockchain       │
+│ (User Data)     │ │ (Alerts)    │ │ (Transactions)   │
+└─────────────────┘ └─────────────┘ └──────────────────┘
+1. Main Dashboard (Web Version)
+[Top Navigation Bar]
+
+Logo + "FinSmart AI"
+
+Quick links: Home, Dashboard, Investments, Loans, Profile
+
+Language selector (EN/HI/TA/BN etc.)
+
+User profile with biometric login icon
+
+[Main Dashboard Layout - 3 Column Design]
+
+Left Panel (25% width) - Quick Actions
+
+Account Balance (₹XX,XXX)
+
+Big Blue "Chat with AI" button
+
+Quick Action Buttons:
+
+Fund Transfer
+
+Pay Bills
+
+Set Savings Goal
+
+Recent Transactions list
+
+Center Panel (50% width) - AI Chatbot Interface
+
+Chat window showing:
+
+User query in Hindi: "मेरी बचत बढ़ाने के लिए सुझाव दें"
+
+AI response with bullet points (savings tips + graph icon)
+
+Mic/voice input option
+
+Suggested prompts:
+
+"Show my spending trends"
+
+"Suggest mutual funds"
+
+Right Panel (25% width) - Insights
+
+Monthly Spending Graph (pie chart)
+
+Credit Score Meter (750/900)
+
+Alerts ("Unusual transaction detected!")
+
+Gamification badge ("Savings Star ⭐")
+
+2. Mobile App View
+[Collapsible Hamburger Menu]
+
+Same features as web but stacked vertically
+
+Floating AI chatbot button (persistent across screens)
+
+Swipeable cards for:
+
+Balance snapshot
+
+Spending categories
+
+Active savings goals
+
+3. Financial Planning Section
+Risk Profile Slider: Conservative → Aggressive
+
+AI Recommendations Card:
+
+"Based on your ₹30k/month savings, consider:"
+
+SIP Mutual Funds (₹5k/month)
+
+Gold Bonds (10% allocation)
+
+Round-Up Savings Toggle: "Enable round-up to save ₹1,200/yr"
+
+4. SME Dashboard (Separate Tab)
+Working Capital Calculator
+
+Loan Eligibility Meter ("Eligible for ₹5L @ 9.8%")
+
+Cash Flow Calendar (AI-predicted gaps highlighted)
+
+5. Security Panel
+Shield icon with "100% Blockchain-Encrypted"
+
+Biometric settings (Fingerprint/Face ID)
+
+Active Sessions list
+
+Fraud Alert History ("Blocked 3 phishing attempts")
+
+6. Gamification Hub
+Progress bar: "₹8,500/₹10k monthly goal"
+
+Badge shelf: "Early Saver", "Budget Pro"
+
+Reward coupons ("Get ₹50 cashback on FD")
+
+UI Style Guide
+Colors: Navy blue (trust) + Teal (AI) + Gold (rewards)
+
+Fonts: Poppins (clean), with Indian language support
+
+Icons: Flat design with tooltips
+
+Micro-interactions:
+
+Pulse animation when AI responds
+
+Confetti on goal achievement
+
+Sample Screenshot Description
+![Mockup Description]
+
+Header: Biometric login prompt + Hindi/English toggle
+
+Chat Window: AI analyzing a screenshot of a grocery bill
+
+Visual Graph: "You spend 40% on Food - try local markets!"
+
+Footer: RBI/GDPR compliance badges + chatbot rating
+
+This design prioritizes:
+
+Accessibility: Large buttons + voice input
+
+Trust: Security indicators always visible
+
+Actionability: Every insight has a "Do This" button
+
+Cultural Context: Language support + local investment options

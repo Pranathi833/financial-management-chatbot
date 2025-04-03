@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart AI - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #0ea5e9;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--light);
+        }
+        .login-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .input-field {
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+        .password-toggle {
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 opacity-10" style="background-image: url('https://images.pexels.com/photos/210607/pexels-photo-210607.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'); background-size: cover;"></div>
+    
+    <!-- Login Card -->
+    <div class="login-card rounded-2xl shadow-2xl overflow-hidden w-full max-w-md z-10">
+        <div class="p-8">
+            <!-- Logo and Header -->
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-blue-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-robot text-3xl gradient-text"></i>
+                </div>
+                <h1 class="text-3xl font-bold gradient-text">FinSmart AI</h1>
+                <p class="text-gray-300 mt-2">Your personal financial coach</p>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm" class="space-y-5">
+                <!-- Email Field -->
+                <div class="relative">
+                    <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                    <div class="relative">
+                        <input type="email" id="email" required
+                               class="input-field w-full bg-black/20 border border-gray-700 rounded-lg p-3 pl-10 focus:outline-none focus:border-blue-500"
+                               placeholder="your@email.com">
+                        <i class="fas fa-envelope absolute left-3 top-3.5 text-gray-400"></i>
+                    </div>
+                    <p id="emailError" class="hidden text-xs text-red-400 mt-1">Please enter a valid email address</p>
+                </div>
+                
+                <!-- Password Field -->
+                <div class="relative">
+                    <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+                    <div class="relative">
+                        <input type="password" id="password" required
+                               class="input-field w-full bg-black/20 border border-gray-700 rounded-lg p-3 pl-10 pr-10 focus:outline-none focus:border-blue-500"
+                               placeholder="••••••••">
+                        <i class="fas fa-lock absolute left-3 top-3.5 text-gray-400"></i>
+                        <i class="fas fa-eye-slash password-toggle text-gray-400" id="togglePassword"></i>
+                    </div>
+                    <p id="passwordError" class="hidden text-xs text-red-400 mt-1">Password must be at least 8 characters</p>
+                </div>
+                
+                <!-- Remember Me & Forgot Password -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox" 
+                               class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 bg-black/20">
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-300">Remember me</label>
+                    </div>
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-blue-400 hover:text-blue-300 transition">Forgot password?</a>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" id="submitBtn"
+                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition">
+                        <span id="btnText">Sign in</span>
+                        <i class="fas fa-spinner fa-spin ml-2 hidden" id="spinner"></i>
+                    </button>
+                </div>
+                
+                <!-- Divider -->
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-700"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-transparent text-gray-400">Or continue with</span>
+                    </div>
+                </div>
+                
+                <!-- Social Login Buttons -->
+                <div class="grid grid-cols-2 gap-3">
+                    <button type="button" 
+                            class="w-full inline-flex justify-center py-2.5 px-4 border border-gray-700 rounded-lg shadow-sm bg-black/20 text-sm font-medium text-gray-300 hover:bg-white/5 transition">
+                        <i class="fab fa-google text-red-400 mr-2"></i>
+                        <span>Google</span>
+                    </button>
+                    
+                    <button type="button" 
+                            class="w-full inline-flex justify-center py-2.5 px-4 border border-gray-700 rounded-lg shadow-sm bg-black/20 text-sm font-medium text-gray-300 hover:bg-white/5 transition">
+                        <i class="fab fa-facebook text-blue-400 mr-2"></i>
+                        <span>Facebook</span>
+                    </button>
+                </div>
+                
+                <!-- Sign Up Link -->
+                <p class="mt-4 text-center text-sm text-gray-400">
+                    Don't have an account? 
+                    <a href="#" class="font-medium text-blue-400 hover:text-blue-300 transition">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const togglePassword = document.getElementById('togglePassword');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const spinner = document.getElementById('spinner');
+            
+            // Toggle password visibility
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye-slash');
+                this.classList.toggle('fa-eye');
+            });
+            
+            // Form validation
+            emailInput.addEventListener('input', validateEmail);
+            passwordInput.addEventListener('input', validatePassword);
+            
+            function validateEmail() {
+                const emailError = document.getElementById('emailError');
+                const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value);
+                
+                if (!isValid && emailInput.value) {
+                    emailError.classList.remove('hidden');
+                    emailInput.classList.add('border-red-500');
+                    emailInput.classList.remove('border-gray-700');
+                } else {
+                    emailError.classList.add('hidden');
+                    emailInput.classList.remove('border-red-500');
+                    emailInput.classList.add('border-gray-700');
+                }
+                
+                return isValid;
+            }
+            
+            function validatePassword() {
+                const passwordError = document.getElementById('passwordError');
+                const isValid = passwordInput.value.length >= 8;
+                
+                if (!isValid && passwordInput.value) {
+                    passwordError.classList.remove('hidden');
+                    passwordInput.classList.add('border-red-500');
+                    passwordInput.classList.remove('border-gray-700');
+                } else {
+                    passwordError.classList.add('hidden');
+                    passwordInput.classList.remove('border-red-500');
+                    passwordInput.classList.add('border-gray-700');
+                }
+                
+                return isValid;
+            }
+            
+            // Form submission
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const isEmailValid = validateEmail();
+                const isPasswordValid = validatePassword();
+                
+                if (isEmailValid && isPasswordValid) {
+                    // Show loading state
+                    btnText.textContent = 'Signing in...';
+                    spinner.classList.remove('hidden');
+                    submitBtn.disabled = true;
+                    
+                    // Simulate API call
+                    setTimeout(() => {
+                        // Reset form
+                        btnText.textContent = 'Sign in';
+                        spinner.classList.add('hidden');
+                        submitBtn.disabled = false;
+                        
+                        // Show success message (in a real app, redirect would happen here)
+                        alert('Login successful! Redirecting to dashboard...');
+                        window.location.href = 'index.html';
+                    }, 1500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

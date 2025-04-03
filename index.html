@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart AI - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #0ea5e9;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, #0f172a 100%);
+            color: var(--light);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full glass-card px-8 py-4 z-50">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-robot text-2xl text-yellow-400"></i>
+                <span class="text-xl font-bold gradient-text">FinSmart AI</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="index.html" class="text-lg font-medium hover:text-blue-300 transition">Home</a>
+                <a href="investments.html" class="text-lg hover:text-blue-300 transition">Investments</a>
+                <a href="chatbot.html" class="text-lg hover:text-blue-300 transition">AI Advisor</a>
+                <div class="flex items-center space-x-2">
+                    <button id="themeToggle" class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-white/10 transition">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center cursor-pointer">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-24 pb-8 px-8 grid grid-cols-12 gap-6 max-w-7xl mx-auto">
+        <!-- Left Panel -->
+        <div class="col-span-3 space-y-6">
+            <!-- Account Summary -->
+            <div class="glass-card rounded-xl p-6">
+                <h3 class="text-xl font-semibold mb-4">Account Summary</h3>
+                <div class="bg-gradient-to-r from-blue-600 to-cyan-500 p-4 rounded-lg mb-6 text-center">
+                    <p class="text-sm opacity-80">Total Balance</p>
+                    <p class="text-3xl font-bold">₹1,25,000</p>
+                </div>
+                <button class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg mb-4 flex items-center justify-center transition">
+                    <i class="fas fa-comment-dots mr-2"></i> Quick Chat
+                </button>
+                <div class="space-y-3">
+                    <button class="w-full glass-card hover:bg-white/5 text-white py-3 px-4 rounded-lg flex items-center transition">
+                        <i class="fas fa-exchange-alt mr-3"></i> Fund Transfer
+                    </button>
+                    <button class="w-full glass-card hover:bg-white/5 text-white py-3 px-4 rounded-lg flex items-center transition">
+                        <i class="fas fa-file-invoice-dollar mr-3"></i> Pay Bills
+                    </button>
+                    <button class="w-full glass-card hover:bg-white/5 text-white py-3 px-4 rounded-lg flex items-center transition">
+                        <i class="fas fa-piggy-bank mr-3"></i> Savings Goal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="glass-card rounded-xl p-6">
+                <h3 class="text-xl font-semibold mb-4">Recent Activity</h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center mr-3">
+                                <i class="fas fa-shopping-bag text-red-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Grocery Store</p>
+                                <p class="text-sm opacity-60">Today, 10:30 AM</p>
+                            </div>
+                        </div>
+                        <p class="text-red-400 font-medium">-₹1,250</p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center mr-3">
+                                <i class="fas fa-rupee-sign text-green-400"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium">Salary Credit</p>
+                                <p class="text-sm opacity-60">Yesterday</p>
+                            </div>
+                        </div>
+                        <p class="text-green-400 font-medium">+₹45,000</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Panel -->
+        <div class="col-span-6">
+            <!-- Financial Overview -->
+            <div class="glass-card rounded-xl p-6 mb-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Financial Overview</h2>
+                    <div class="flex space-x-2">
+                        <button class="text-sm bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-full">
+                            This Month
+                        </button>
+                        <button class="text-sm glass-card hover:bg-white/5 px-3 py-1 rounded-full">
+                            Custom Range
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chart Placeholder -->
+                <div class="bg-black/20 rounded-xl p-4 h-64 mb-6 flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-chart-pie text-4xl text-blue-400 mb-2"></i>
+                        <p class="opacity-70">Spending analytics will appear here</p>
+                    </div>
+                </div>
+                
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="glass-card p-4 rounded-lg">
+                        <p class="text-sm opacity-70 mb-1">Income</p>
+                        <p class="text-xl font-bold text-green-400">₹45,000</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-lg">
+                        <p class="text-sm opacity-70 mb-1">Expenses</p>
+                        <p class="text-xl font-bold text-red-400">₹18,750</p>
+                    </div>
+                    <div class="glass-card p-4 rounded-lg">
+                        <p class="text-sm opacity-70 mb-1">Savings</p>
+                        <p class="text-xl font-bold text-cyan-400">₹26,250</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Advisor -->
+            <div class="glass-card rounded-xl p-6">
+                <h3 class="text-xl font-semibold mb-4">AI Financial Advisor</h3>
+                <div class="bg-black/20 rounded-xl p-4 h-48 overflow-y-auto mb-4">
+                    <div class="flex justify-end mb-4">
+                        <div class="bg-blue-600 max-w-[80%] p-3 rounded-lg rounded-tr-none">
+                            <p>How can I save more money?</p>
+                        </div>
+                    </div>
+                    <div class="flex justify-start mb-4">
+                        <div class="bg-gray-700 max-w-[80%] p-3 rounded-lg rounded-tl-none">
+                            <p class="font-medium mb-1">Savings Recommendations:</p>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Automate 10% of income to savings</li>
+                                <li>Review subscription services</li>
+                                <li>Set up a high-yield savings account</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex">
+                    <input type="text" placeholder="Ask financial advice..." 
+                           class="flex-grow bg-black/20 border border-gray-700 rounded-l-lg p-3 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    <button class="bg-blue-600 hover:bg-blue-700 px-4 rounded-r-lg transition">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="col-span-3 space-y-6">
+            <!-- Credit Score -->
+            <div class="glass-card rounded-xl p-6">
+                <h3 class="text-xl font-semibold mb-4">Credit Score</h3>
+                <div class="flex justify-center mb-4">
+                    <div class="relative w-32 h-32">
+                        <svg class="w-full h-full" viewBox="0 0 36 36">
+                            <path d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#1e293b"
+                                stroke-width="3"
+                                stroke-dasharray="100, 100"
+                            />
+                            <path d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#0ea5e9"
+                                stroke-width="3"
+                                stroke-dasharray="83, 100"
+                            />
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl font-bold">750</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm opacity-70">Good (National Average: 715)</p>
+                </div>
+            </div>
+
+            <!-- Alerts -->
+            <div class="glass-card rounded-xl p-6">
+                <h3 class="text-xl font-semibold mb-4">Alerts</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="bg-red-500/20 rounded-full p-2 mr-3">
+                            <i class="fas fa-exclamation text-red-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-medium">Unusual Activity</h4>
+                            <p class="text-sm opacity-70">Large transaction detected</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between bg-yellow-400/10 p-3 rounded-lg">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-2"></i>
+                            <span>Savings Reward</span>
+                        </div>
+                        <button class="text-xs bg-yellow-400 text-gray-900 px-2 py-1 rounded">
+                            Claim
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="glass-card rounded-xl p-6">
+                <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                <div class="space-y-3">
+                    <a href="#" class="flex items-center p-2 hover:bg-white/5 rounded-lg transition">
+                        <i class="fas fa-file-invoice mr-3 text-blue-400"></i>
+                        <span>Tax Documents</span>
+                    </a>
+                    <a href="#" class="flex items-center p-2 hover:bg-white/5 rounded-lg transition">
+                        <i class="fas fa-chart-line mr-3 text-green-400"></i>
+                        <span>Investment Reports</span>
+                    </a>
+                    <a href="#" class="flex items-center p-2 hover:bg-white/5 rounded-lg transition">
+                        <i class="fas fa-cog mr-3 text-purple-400"></i>
+                        <span>Account Settings</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            const icon = themeToggle.querySelector('i');
+            if (document.documentElement.classList.contains('dark')) {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+
+        // Initialize tooltips
+        document.querySelectorAll('[data-tooltip]').forEach(el => {
+            el.addEventListener('mouseenter', showTooltip);
+            el.addEventListener('mouseleave', hideTooltip);
+        });
+
+        function showTooltip(e) {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'absolute z-50 bg-gray-900 text-white text-xs px-2 py-1 rounded';
+            tooltip.textContent = e.target.dataset.tooltip;
+            document.body.appendChild(tooltip);
+            
+            const rect = e.target.getBoundingClientRect();
+            tooltip.style.top = `${rect.top - 30}px`;
+            tooltip.style.left = `${rect.left + rect.width/2 - tooltip.offsetWidth/2}px`;
+            
+            e.target._tooltip = tooltip;
+        }
+
+        function hideTooltip(e) {
+            if (e.target._tooltip) {
+                e.target._tooltip.remove();
+            }
+        }
+    </script>
+</body>
+</html>
