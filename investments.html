@@ -42,6 +42,9 @@
             height: 40px;
             width: 100px;
         }
+        .badge {
+            @apply text-xs px-2 py-1 rounded-full text-center;
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -103,11 +106,221 @@
                 </div>
                 <div class="glass-card p-4 rounded-lg">
                     <p class="text-sm text-gray-400 mb-1">Risk Level</p>
-                    <p class="text-xl font-bold text-yellow-400">Moderate</p>
+                    <p class="text-xl font-bold text-yellow-400 risk-level">Moderate</p>
                 </div>
             </div>
         </div>
-        
+
+        <!-- Comprehensive Investment Options -->
+        <div class="glass-card rounded-xl p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Comprehensive Investment Options</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Traditional Investments -->
+                <div class="investment-card glass-card rounded-xl overflow-hidden transition-all duration-300">
+                    <div class="p-6">
+                        <h3 class="font-bold flex items-center">
+                            <i class="fas fa-landmark mr-2 text-blue-400"></i>
+                            Traditional Investments
+                        </h3>
+                        <ul class="list-disc pl-5 mt-3 space-y-2">
+                            <li><span class="font-medium">Stocks (Direct Equity):</span> Shares of listed companies across sectors</li>
+                            <li><span class="font-medium">Mutual Funds:</span> Diversified equity, debt, and hybrid funds</li>
+                            <li><span class="font-medium">Bonds:</span> Government and corporate debt instruments</li>
+                            <li><span class="font-medium">Fixed Deposits:</span> Secure bank/institutional deposits</li>
+                            <li><span class="font-medium">Real Estate:</span> Residential & commercial properties</li>
+                            <li><span class="font-medium">Gold:</span> Physical and financial gold products</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- High-Growth Sectors -->
+                <div class="investment-card glass-card rounded-xl overflow-hidden transition-all duration-300">
+                    <div class="p-6">
+                        <h3 class="font-bold flex items-center">
+                            <i class="fas fa-chart-line mr-2 text-green-400"></i>
+                            High-Growth Sectors
+                        </h3>
+                        <div class="grid grid-cols-2 gap-2 mt-3">
+                            <span class="badge bg-blue-500/20 text-blue-400">Technology & IT</span>
+                            <span class="badge bg-green-500/20 text-green-400">Renewable Energy</span>
+                            <span class="badge bg-purple-500/20 text-purple-400">Pharmaceuticals</span>
+                            <span class="badge bg-yellow-500/20 text-yellow-400">EV & Mobility</span>
+                            <span class="badge bg-pink-500/20 text-pink-400">FinTech</span>
+                            <span class="badge bg-indigo-500/20 text-indigo-400">E-commerce</span>
+                            <span class="badge bg-red-500/20 text-red-400">Defense</span>
+                            <span class="badge bg-teal-500/20 text-teal-400">Logistics</span>
+                        </div>
+                        <p class="mt-3 text-sm">Plus: Infrastructure, FMCG, Capital Goods, Food Processing, and more</p>
+                    </div>
+                </div>
+
+                <!-- Government & New-Age -->
+                <div class="investment-card glass-card rounded-xl overflow-hidden transition-all duration-300">
+                    <div class="p-6">
+                        <h3 class="font-bold flex items-center">
+                            <i class="fas fa-lightbulb mr-2 text-yellow-400"></i>
+                            Special Opportunities
+                        </h3>
+                        <div class="mt-3 space-y-3">
+                            <div>
+                                <h4 class="font-medium">Government Initiatives:</h4>
+                                <ul class="list-disc pl-5 text-sm">
+                                    <li>Make in India</li>
+                                    <li>Digital India</li>
+                                    <li>Clean Energy Goals</li>
+                                    <li>PLI Schemes</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-medium">New-Age Options:</h4>
+                                <ul class="list-disc pl-5 text-sm">
+                                    <li>REITs & InvITs</li>
+                                    <li>Venture Capital</li>
+                                    <li>Sovereign Gold Bonds</li>
+                                    <li>ESG Funds</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI-Powered Recommendations -->
+        <div class="glass-card rounded-xl p-6 mb-8">
+            <div class="flex items-start">
+                <div class="bg-blue-600/20 p-3 rounded-lg mr-4">
+                    <i class="fas fa-robot text-blue-400 text-xl"></i>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-xl font-semibold mb-2">AI-Powered Investment Strategy</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                        <!-- Conservative -->
+                        <div class="bg-white/5 p-4 rounded-lg border-l-4 border-green-400">
+                            <h3 class="font-bold text-green-400 mb-2">Conservative</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
+                                    <span>Fixed Deposits (60-70%)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
+                                    <span>Government Bonds (20-30%)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
+                                    <span>Debt Mutual Funds (10-20%)</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Moderate -->
+                        <div class="bg-white/5 p-4 rounded-lg border-l-4 border-yellow-400">
+                            <h3 class="font-bold text-yellow-400 mb-2">Moderate</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-yellow-400 mr-2 mt-1"></i>
+                                    <span>Hybrid Mutual Funds (40-50%)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-yellow-400 mr-2 mt-1"></i>
+                                    <span>REITs/InvITs (20-30%)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-yellow-400 mr-2 mt-1"></i>
+                                    <span>Blue Chip Stocks (20-30%)</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Aggressive -->
+                        <div class="bg-white/5 p-4 rounded-lg border-l-4 border-red-400">
+                            <h3 class="font-bold text-red-400 mb-2">Aggressive</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-red-400 mr-2 mt-1"></i>
+                                    <span>High-Growth Sector Stocks (50-60%)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-red-400 mr-2 mt-1"></i>
+                                    <span>Venture Capital (20-30%)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-red-400 mr-2 mt-1"></i>
+                                    <span>Thematic Mutual Funds (20-30%)</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Market Insights -->
+        <div class="glass-card rounded-xl p-6 mb-8">
+            <div class="flex items-start">
+                <div class="bg-purple-600/20 p-3 rounded-lg mr-4">
+                    <i class="fas fa-brain text-purple-400 text-xl"></i>
+                </div>
+                <div class="flex-1">
+                    <h2 class="text-xl font-semibold mb-4">AI Market Insights</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Current Climate -->
+                        <div>
+                            <h3 class="font-medium mb-2 text-blue-300">Current Market Climate</h3>
+                            <div class="bg-white/5 p-4 rounded-lg">
+                                <p class="text-sm">Our AI analysis indicates:</p>
+                                <ul class="list-disc pl-5 mt-2 text-sm space-y-1">
+                                    <li>Tech sector showing 12% quarterly growth</li>
+                                    <li>Renewable energy investments up 18% YoY</li>
+                                    <li>Stable outlook for government bonds</li>
+                                    <li>Emerging opportunities in EV supply chain</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Risk Management -->
+                        <div>
+                            <h3 class="font-medium mb-2 text-green-300">Risk Management Tips</h3>
+                            <div class="bg-white/5 p-4 rounded-lg">
+                                <ul class="list-disc pl-5 text-sm space-y-1">
+                                    <li>Maintain 6-12 month emergency fund</li>
+                                    <li>Diversify across 3+ asset classes</li>
+                                    <li>Rebalance portfolio quarterly</li>
+                                    <li>Consider tax implications</li>
+                                    <li>Review insurance coverage</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Time Horizons -->
+                    <div class="mt-6">
+                        <h3 class="font-medium mb-2 text-yellow-300">Time-Based Strategies</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white/5 p-4 rounded-lg">
+                                <h4 class="font-medium text-sm mb-1">Short-Term (1-3 years)</h4>
+                                <ul class="text-xs space-y-1">
+                                    <li>• Focus on liquid assets</li>
+                                    <li>• Consider short-duration bonds</li>
+                                    <li>• Limit equity exposure to 30%</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg">
+                                <h4 class="font-medium text-sm mb-1">Long-Term (5+ years)</h4>
+                                <ul class="text-xs space-y-1">
+                                    <li>• Higher equity allocation</li>
+                                    <li>• Dollar-cost averaging</li>
+                                    <li>• Sector rotation strategy</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Portfolio Overview -->
         <div class="glass-card rounded-xl p-6 mb-8">
             <h2 class="text-xl font-semibold mb-4">Portfolio Overview</h2>
@@ -228,7 +441,7 @@
                             </div>
                         </div>
                         <div class="mb-4 sparkline">
-                            <canvas class="sparkline" id="debtSparkline"></canvas>
+                            <canvas class="sparkline", id="debtSparkline"></canvas>
                         </div>
                         <div class="flex justify-between items-center mb-4">
                             <div>
@@ -336,106 +549,3 @@
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Portfolio Pie Chart
-            const portfolioCtx = document.getElementById('portfolioChart').getContext('2d');
-            const portfolioChart = new Chart(portfolioCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Equity', 'Debt', 'Gold', 'Cash'],
-                    datasets: [{
-                        data: [60, 30, 7, 3],
-                        backgroundColor: [
-                            '#3b82f6',
-                            '#8b5cf6',
-                            '#f59e0b',
-                            '#64748b'
-                        ],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    cutout: '70%',
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            labels: {
-                                color: '#e2e8f0',
-                                font: {
-                                    family: 'Poppins'
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Sparkline Charts
-            function createSparkline(id, color) {
-                const ctx = document.getElementById(id).getContext('2d');
-                return new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                        datasets: [{
-                            data: [100, 105, 102, 110, 115, 125],
-                            borderColor: color,
-                            borderWidth: 2,
-                            fill: false,
-                            tension: 0.4,
-                            pointRadius: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        },
-                        scales: {
-                            x: {
-                                display: false
-                            },
-                            y: {
-                                display: false
-                            }
-                        }
-                    }
-                });
-            }
-
-            createSparkline('equitySparkline', '#3b82f6');
-            createSparkline('thematicSparkline', '#10b981');
-            createSparkline('debtSparkline', '#8b5cf6');
-
-            // Risk Slider
-            const riskSlider = document.getElementById('riskSlider');
-            riskSlider.addEventListener('input', function() {
-                const value = parseInt(this.value);
-                let riskLevel = '';
-                let color = '';
-                
-                if (value <= 3) {
-                    riskLevel = 'Conservative';
-                    color = 'text-green-400';
-                } else if (value <= 7) {
-                    riskLevel = 'Moderate';
-                    color = 'text-yellow-400';
-                } else {
-                    riskLevel = 'Aggressive';
-                    color = 'text-red-400';
-                }
-                
-                document.querySelector('.risk-level').textContent = riskLevel;
-                document.querySelector('.risk-level').className = `text-xl font-bold ${color} risk-level`;
-            });
-        });
-    </script>
-</body>
-</html>
